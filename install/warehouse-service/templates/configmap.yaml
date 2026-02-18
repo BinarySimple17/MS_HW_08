@@ -49,7 +49,7 @@ data:
         swagger-ui:
           path: /swagger-ui.html
         info:
-          title: Billing Service API
+          title: Warehouse Service API
           version: {{ .Values.image.tag }}
           description: {{ .Chart.Name }} API.
           contact:

@@ -1,0 +1,908 @@
+PS Z:\Java\otus MicroServ HW 8> newman run .\.postman\HW8.postman_collection.json
+(node:29608) [DEP0176] DeprecationWarning: fs.F_OK is deprecated, use fs.constants.F_OK instead
+(Use `node --trace-deprecation ...` to show where the warning was created)
+newman
+
+HW8
+
+→ register
+  ┌
+  │ '=== REQUEST DATA ==='
+  │ 'URL:', 'http://arch.homework/api/v1/auth/register'
+  │ 'Method:', 'POST'
+  │ 'Headers:', '{\n  "accept": "*/*",\n  "content-type": "application/json"\n}'
+  │ 'Body:', {
+  │   mode: 'raw',
+  │   raw: '{\n' +
+  │     '  "username": "{{randomUsername}}",\n' +
+  │     '  "email": "{{randomUsername}}@mail.com",\n' +
+  │     '  "phone": "+7987654321",\n' +
+  │     '  "password": "{{userPassword}}",\n' +
+  │     '  "firstName": "Alex4_{{randomUsername}}",\n' +
+  │     '  "lastName": "Ivanov4_{{randomUsername}}",\n' +
+  │     '  "login": true\n' +
+  │     '}',
+  │   options: { raw: { language: 'json' } }
+  │ }
+  │ '\n'
+  └
+  ┌
+  │ 'Прошло 7 секунд, отправляю запрос'
+  │ '=== REGISTER USER_1 ==='
+  └
+  POST http://arch.homework/api/v1/auth/register [201 Created, 641B, 246ms]
+  ┌
+  │ '=== RESPONSE DATA ==='
+  │ 'Status:', 201, 'Created'
+  │ 'Response Time:', 246, 'ms'
+  │ 'Response Headers:', '{\n' +
+  │   '  "date": "Wed, 18 Feb 2026 09:52:09 GMT",\n' +
+  │   '  "content-type": "application/json",\n' +
+  │   '  "transfer-encoding": "chunked",\n' +
+  │   '  "connection": "keep-alive",\n' +
+  │   '  "x-content-type-options": "nosniff",\n' +
+  │   '  "x-xss-protection": "0",\n' +
+  │   '  "cache-control": "no-cache, no-store, max-age=0, must-revalidate",\n' +
+  │   '  "pragma": "no-cache",\n' +
+  │   '  "expires": "0",\n' +
+  │   '  "x-frame-options": "DENY"\n' +
+  │   '}'
+  │ 'Response Body (json):', '{\n' +
+  │   '  "accessToken": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1c3I2OTMiLCJpYXQiOjE3NzE0MDgzMjksImV4cCI6MTc3MTQxMTkyOSw
+  │ icm9sZXMiOlsiVVNFUiJdfQ.sn45zqPLpsGjM4rWRCtLYhCjST4XL3bwmx_d342WrTfMWRCMEwyhDyUOQbeNqwvM",\n' +
+  │   '  "refreshToken": "25f1043f-a6d3-455e-be1b-46c799908e21",\n' +
+  │   '  "tokenType": "Bearer",\n' +
+  │   '  "userInfo": {\n' +
+  │   '    "id": 7,\n' +
+  │   '    "username": "usr693",\n' +
+  │   '    "roles": [\n' +
+  │   '      "USER"\n' +
+  │   '    ]\n' +
+  │   '  }\n' +
+  │   '}'
+  └
+  √  Статус 201 OK
+
+→ deposit money
+  ┌
+  │ '=== REQUEST DATA ==='
+  │ 'URL:', 'http://arch.homework/api/v1/billing/account/operate'
+  │ 'Method:', 'POST'
+  │ 'Headers:', '{\n  "accept": "*/*",\n  "x-username": "{{randomUsername}}",\n  "content-typ
+  │ e": "application/json"\n}'
+  │ 'Body:', {
+  │   mode: 'raw',
+  │   raw: '{\n' +
+  │     '  "type": "DEPOSIT",\n' +
+  │     '  "amount": {{depositAmount}},\n' +
+  │     '  "account": {\n' +
+  │     '    "username": "{{randomUsername}}"\n' +
+  │     '  }\n' +
+  │     '}',
+  │   options: { raw: { language: 'json' } }
+  │ }
+  │ '\n'
+  └
+  ┌
+  │ 'Прошло 7 секунд, отправляю запрос'
+  └
+  POST http://arch.homework/api/v1/billing/account/operate [200 OK, 408B, 21ms]
+  ┌
+  │ '=== RESPONSE DATA ==='
+  │ 'Status:', 200, 'OK'
+  │ 'Response Time:', 21, 'ms'
+  │ 'Response Headers:', '{\n' +
+  │   '  "date": "Wed, 18 Feb 2026 09:52:16 GMT",\n' +
+  │   '  "content-type": "application/json",\n' +
+  │   '  "transfer-encoding": "chunked",\n' +
+  │   '  "connection": "keep-alive",\n' +
+  │   '  "x-content-type-options": "nosniff",\n' +
+  │   '  "x-xss-protection": "0",\n' +
+  │   '  "cache-control": "no-cache, no-store, max-age=0, must-revalidate",\n' +
+  │   '  "pragma": "no-cache",\n' +
+  │   '  "expires": "0",\n' +
+  │   '  "x-frame-options": "DENY"\n' +
+  │   '}'
+  │ 'Response Body (json):', '{\n' +
+  │   '  "id": 26,\n' +
+  │   '  "createdAt": "2026-02-18T09:52:16.476667259",\n' +
+  │   '  "type": "DEPOSIT",\n' +
+  │   '  "amount": 150,\n' +
+  │   '  "orderId": null\n' +
+  │   '}'
+  │ 'depositAmount=:', 150
+  └
+  √  Баланс пополнен. Статус 200 OK
+
+→ get balance
+  ┌
+  │ '=== REQUEST DATA ==='
+  │ 'URL:', 'http://arch.homework/api/v1/billing/account/balance'
+  │ 'Method:', 'GET'
+  │ 'Headers:', '{\n  "accept": "*/*",\n  "x-username": "{{randomUsername}}",\n  "content-typ
+  │ e": "application/json"\n}'
+  │ '\n'
+  └
+  ┌
+  │ 'Прошло 7 секунд, отправляю запрос'
+  └
+  GET http://arch.homework/api/v1/billing/account/balance [200 OK, 355B, 14ms]
+  ┌
+  │ '=== RESPONSE DATA ==='
+  │ 'Status:', 200, 'OK'
+  │ 'Response Time:', 14, 'ms'
+  │ 'Response Headers:', '{\n' +
+  │   '  "date": "Wed, 18 Feb 2026 09:52:26 GMT",\n' +
+  │   '  "content-type": "application/json",\n' +
+  │   '  "transfer-encoding": "chunked",\n' +
+  │   '  "connection": "keep-alive",\n' +
+  │   '  "x-content-type-options": "nosniff",\n' +
+  │   '  "x-xss-protection": "0",\n' +
+  │   '  "cache-control": "no-cache, no-store, max-age=0, must-revalidate",\n' +
+  │   '  "pragma": "no-cache",\n' +
+  │   '  "expires": "0",\n' +
+  │   '  "x-frame-options": "DENY"\n' +
+  │   '}'
+  │ 'Response Body (json):', '{\n  "id": 7,\n  "username": "usr693",\n  "balance": 150\n}'
+  │ 9m
+  └
+  √  Статус 200 OK
+
+→ get_catalog initial
+  ┌
+  │ '=== REQUEST DATA ==='
+  │ 'URL:', 'http://arch.homework/api/v1/warehouse/catalog?size=20&shopId=1'
+  │ 'Method:', 'GET'
+  │ 'Headers:', '{\n  "accept": "*/*"\n}'
+  │ '\n'
+  └
+  ┌
+  │ 'Прошло 7 секунд, отправляю запрос'
+  └
+  GET http://arch.homework/api/v1/warehouse/catalog?size=20&shopId=1 [200 OK, 1.73kB, 19ms]
+  ┌
+  │ '=== RESPONSE DATA ==='
+  │ 'Status:', 200, 'OK'
+  │ 'Response Time:', 19, 'ms'
+  │ 'Response Headers:', '{\n' +
+  │   '  "date": "Wed, 18 Feb 2026 09:52:32 GMT",\n' +
+  │   '  "content-type": "application/json",\n' +
+  │   '  "transfer-encoding": "chunked",\n' +
+  │   '  "connection": "keep-alive",\n' +
+  │   '  "x-content-type-options": "nosniff",\n' +
+  │   '  "x-xss-protection": "0",\n' +
+  │   '  "cache-control": "no-cache, no-store, max-age=0, must-revalidate",\n' +
+  │   '  "pragma": "no-cache",\n' +
+  │   '  "expires": "0",\n' +
+  │   '  "x-frame-options": "DENY"\n' +
+  │   '}'
+  │ 'Response Body (json):', '{\n' +
+  │   '  "content": [\n' +
+  │   '    {\n' +
+  │   '      "id": 1,\n' +
+  │   '      "shopId": 1,\n' +
+  │   '      "price": 100,\n' +
+  │   '      "quantity": 10,\n' +
+  │   '      "reservedQuantity": 0,\n' +
+  │   '      "active": true,\n' +
+  │   '      "createdAt": "2026-02-18T07:16:24.959504",\n' +
+  │   '      "updatedAt": "2026-02-18T07:16:24.959504",\n' +
+  │   '      "product": {\n' +
+  │   '        "id": 1,\n' +
+  │   '        "name": "Бутер привокзальный особый",\n' +
+  │   '        "description": "Филе хлеба, мышиные хвосты, костры рябин       ",\n' +
+  │   '        "sku": "SKU001"\n' +
+  │   '      }\n' +
+  │   '    },\n' +
+  │   '    {\n' +
+  │   '      "id": 4,\n' +
+  │   '      "shopId": 1,\n' +
+  │   '      "price": 100,\n' +
+  │   '      "quantity": 10,\n' +
+  │   '      "reservedQuantity": 0,\n' +
+  │   '      "active": true,\n' +
+  │   '      "createdAt": "2026-02-18T07:16:24.959504",\n' +
+  │   '      "updatedAt": "2026-02-18T07:16:24.959504",\n' +
+  │   '      "product": {\n' +
+  │   '        "id": 4,\n' +
+  │   '        "name": "Бутер 2                   ",\n' +
+  │   '        "description": "Содержимое бутера 2                            ",\n' +
+  │   '        "sku": "SKU004"\n' +
+  │   '      }\n' +
+  │   '    },\n' +
+  │   '    {\n' +
+  │   '      "id": 2,\n' +
+  │   '      "shopId": 1,\n' +
+  │   '      "price": 100,\n' +
+  │   '      "quantity": 114,\n' +
+  │   '      "reservedQuantity": 0,\n' +
+  │   '      "active": true,\n' +
+  │   '      "createdAt": "2026-02-18T07:16:24.959504",\n' +
+  │   '      "updatedAt": "2026-02-18T09:49:44.501964",\n' +
+  │   '      "product": {\n' +
+  │   '        "id": 2,\n' +
+  │   '        "name": "Бутер VIP                 ",\n' +
+  │   '        "description": "Франц.булка, куриная икра, ростки лука, трюфель",\n' +
+  │   '        "sku": "SKU002"\n' +
+  │   '      }\n' +
+  │   '    },\n' +
+  │   '    {\n' +
+  │   '      "id": 3,\n' +
+  │   '      "shopId": 1,\n' +
+  │   '      "price": 100,\n' +
+  │   '      "quantity": 148,\n' +
+  │   '      "reservedQuantity": 0,\n' +
+  │   '      "active": true,\n' +
+  │   '      "createdAt": "2026-02-18T07:16:24.959504",\n' +
+  │   '      "updatedAt": "2026-02-18T09:49:44.502597",\n' +
+  │   '      "product": {\n' +
+  │   '        "id": 3,\n' +
+  │   '        "name": "Бутер                     ",\n' +
+  │   '        "description": "Содержимое бутера                              ",\n' +
+  │   '        "sku": "SKU003"\n' +
+  │   '      }\n' +
+  │   '    }\n' +
+  │   '  ],\n' +
+  │   '  "page": {\n' +
+  │   '    "size": 20,\n' +
+  │   '    "number": 0,\n' +
+  │   '    "totalElements": 4,\n' +
+  │   '    "totalPages": 1\n' +
+  │   '  }\n' +
+  │   '}'
+  └
+  √  Статус 200 OK
+  ┌
+  │ 'Extracted quantities:', [ 10, 10, 114, 148 ]
+  │ 'Quantity details:'
+  │ 'Item 1 (Бутер привокзальный особый): 10 units'
+  │ 'Item 2 (Бутер 2): 10 units'
+  │ 'Item 3 (Бутер VIP): 114 units'
+  │ 'Item 4 (Бутер): 148 units'
+  └
+
+→ order_create ok
+  ┌
+  │ '=== REQUEST DATA ==='
+  │ 'URL:', 'http://arch.homework/api/v1/order'
+  │ 'Method:', 'POST'
+  │ 'Headers:', '{\n  "accept": "*/*",\n  "content-type": "application/json"\n}'
+  │ 'Body:', {
+  │   mode: 'raw',
+  │   raw: '{\n' +
+  │     '  "username": "{{randomUsername}}",\n' +
+  │     '  "totalCost": 0.1,\n' +
+  │     '  "createdAt": "2026-02-17T12:00:00.000Z",\n' +
+  │     '  "shopId": 1,\n' +
+  │     '  "status": "NEW",\n' +
+  │     '  "orderPositions": [\n' +
+  │     '    {\n' +
+  │     '      "productId": 2,\n' +
+  │     '      "price": 30,\n' +
+  │     '      "quantity": 1\n' +
+  │     '    },\n' +
+  │     '    {\n' +
+  │     '      "productId": 3,\n' +
+  │     '      "price": 70,\n' +
+  │     '      "quantity": 1\n' +
+  │     '    }    \n' +
+  │     '  ]\n' +
+  │     '}',
+  │   options: { raw: { language: 'json' } }
+  │ }
+  │ '\n'
+  └
+  ┌
+  │ 'Прошло 7 секунд, отправляю запрос'
+  └
+  POST http://arch.homework/api/v1/order [200 OK, 539B, 151ms]
+  ┌
+  │ '=== RESPONSE DATA ==='
+  │ 'Status:', 200, 'OK'
+  │ 'Response Time:', 151, 'ms'
+  │ 'Response Headers:', '{\n' +
+  │   '  "date": "Wed, 18 Feb 2026 09:52:39 GMT",\n' +
+  │   '  "content-type": "application/json",\n' +
+  │   '  "transfer-encoding": "chunked",\n' +
+  │   '  "connection": "keep-alive",\n' +
+  │   '  "x-content-type-options": "nosniff",\n' +
+  │   '  "x-xss-protection": "0",\n' +
+  │   '  "cache-control": "no-cache, no-store, max-age=0, must-revalidate",\n' +
+  │   '  "pragma": "no-cache",\n' +
+  │   '  "expires": "0",\n' +
+  │   '  "x-frame-options": "DENY"\n' +
+  │   '}'
+  │ 'Response Body (json):', '{\n' +
+  │   '  "id": 14,\n' +
+  │   '  "username": "usr693",\n' +
+  │   '  "orderPositions": [\n' +
+  │   '    {\n' +
+  │   '      "productId": 2,\n' +
+  │   '      "price": 30,\n' +
+  │   '      "quantity": 1\n' +
+  │   '    },\n' +
+  │   '    {\n' +
+  │   '      "productId": 3,\n' +
+  │   '      "price": 70,\n' +
+  │   '      "quantity": 1\n' +
+  │   '    }\n' +
+  │   '  ],\n' +
+  │   '  "totalCost": 0.1,\n' +
+  │   '  "createdAt": "2026-02-18T09:52:38.986269516",\n' +
+  │   '  "shopId": 1,\n' +
+  │   '  "status": "NEW",\n' +
+  │   '  "deliveryId": 0\n' +
+  │   '}'
+  └
+  √  Статус 200 OK
+  √  Заказ создан
+
+→ check balance success
+  ┌
+  │ '=== REQUEST DATA ==='
+  │ 'URL:', 'http://arch.homework/api/v1/billing/account/balance'
+  │ 'Method:', 'GET'
+  │ 'Headers:', '{\n  "accept": "*/*",\n  "x-username": "{{randomUsername}}",\n  "content-typ
+  │ e": "application/json"\n}'
+  │ '\n'
+  └
+  ┌
+  │ 'Прошло 7 секунд, отправляю запрос'
+  └
+  GET http://arch.homework/api/v1/billing/account/balance [200 OK, 355B, 16ms]
+  ┌
+  │ '=== RESPONSE DATA ==='
+  │ 'Status:', 200, 'OK'
+  │ 'Response Time:', 16, 'ms'
+  │ 'Response Headers:', '{\n' +
+  │   '  "date": "Wed, 18 Feb 2026 09:52:45 GMT",\n' +
+  │   '  "content-type": "application/json",\n' +
+  │   '  "transfer-encoding": "chunked",\n' +
+  │   '  "connection": "keep-alive",\n' +
+  │   '  "x-content-type-options": "nosniff",\n' +
+  │   '  "x-xss-protection": "0",\n' +
+  │   '  "cache-control": "no-cache, no-store, max-age=0, must-revalidate",\n' +
+  │   '  "pragma": "no-cache",\n' +
+  │   '  "expires": "0",\n' +
+  │   '  "x-frame-options": "DENY"\n' +
+  │   '}'
+  │ 'Response Body (json):', '{\n  "id": 7,\n  "username": "usr693",\n  "balance": 149.9\n}'
+  │ [39m
+  └
+  √  Статус 200 OK
+  √  Деньги за заказ уплачены
+
+→ get_notif
+  ┌
+  │ '=== REQUEST DATA ==='
+  │ 'URL:', 'http://arch.homework/api/v1/notif?page=0&size=20&parentType=ORDER&parentId={{ord
+  │ erId}}'
+  │ 'Method:', 'GET'
+  │ 'Headers:', '{\n  "accept": "*/*"\n}'
+  │ '\n'
+  └
+  ┌
+  │ 'Прошло 7 секунд, отправляю запрос'
+  └
+  GET http://arch.homework/api/v1/notif?page=0&size=20&parentType=ORDER&parentId=14 [200 OK, 786B, 25ms]
+  ┌
+  │ '=== RESPONSE DATA ==='
+  │ 'Status:', 200, 'OK'
+  │ 'Response Time:', 25, 'ms'
+  │ 'Response Headers:', '{\n' +
+  │   '  "date": "Wed, 18 Feb 2026 09:52:54 GMT",\n' +
+  │   '  "content-type": "application/json",\n' +
+  │   '  "transfer-encoding": "chunked",\n' +
+  │   '  "connection": "keep-alive"\n' +
+  │   '}'
+  │ 'Response Body (json):', '{\n' +
+  │   '  "content": [\n' +
+  │   '    {\n' +
+  │   '      "notificationType": "SUCCESS",\n' +
+  │   '      "parentType": "ORDER",\n' +
+  │   '      "createdAt": "2026-02-18T09:52:44.584969",\n' +
+  │   '      "username": "usr693",\n' +
+  │   '      "text": "Order 14 status changed to Warehouse stock reserving",\n' +
+  │   '      "contact": {\n' +
+  │   '        "email": "usr693@mail.com",\n' +
+  │   '        "phone": null,\n' +
+  │   '        "telegramUsername": null,\n' +
+  │   '        "whatsappUsername": null\n' +
+  │   '      },\n' +
+  │   '      "parentId": 14\n' +
+  │   '    },\n' +
+  │   '    {\n' +
+  │   '      "notificationType": "SUCCESS",\n' +
+  │   '      "parentType": "ORDER",\n' +
+  │   '      "createdAt": "2026-02-18T09:52:49.589863",\n' +
+  │   '      "username": "usr693",\n' +
+  │   '      "text": "Order 14 status changed to Delivery scheduling",\n' +
+  │   '      "contact": {\n' +
+  │   '        "email": "usr693@mail.com",\n' +
+  │   '        "phone": null,\n' +
+  │   '        "telegramUsername": null,\n' +
+  │   '        "whatsappUsername": null\n' +
+  │   '      },\n' +
+  │   '      "parentId": 14\n' +
+  │   '    }\n' +
+  │   '  ],\n' +
+  │   '  "page": {\n' +
+  │   '    "size": 20,\n' +
+  │   '    "number": 0,\n' +
+  │   '    "totalElements": 2,\n' +
+  │   '    "totalPages": 1\n' +
+  │   '  }\n' +
+  │   '}'
+  └
+  √  Статус 200 OK
+  √  Уведомление SUCCESS
+
+→ get_catalog after_ok
+  ┌
+  │ '=== REQUEST DATA ==='
+  │ 'URL:', 'http://arch.homework/api/v1/warehouse/catalog?size=20&shopId=1'
+  │ 'Method:', 'GET'
+  │ 'Headers:', '{\n  "accept": "*/*"\n}'
+  │ '\n'
+  └
+  ┌
+  │ 'Прошло 7 секунд, отправляю запрос'
+  └
+  GET http://arch.homework/api/v1/warehouse/catalog?size=20&shopId=1 [200 OK, 1.73kB, 16ms]
+  ┌
+  │ '=== RESPONSE DATA ==='
+  │ 'Status:', 200, 'OK'
+  │ 'Response Time:', 16, 'ms'
+  │ 'Response Headers:', '{\n' +
+  │   '  "date": "Wed, 18 Feb 2026 09:53:01 GMT",\n' +
+  │   '  "content-type": "application/json",\n' +
+  │   '  "transfer-encoding": "chunked",\n' +
+  │   '  "connection": "keep-alive",\n' +
+  │   '  "x-content-type-options": "nosniff",\n' +
+  │   '  "x-xss-protection": "0",\n' +
+  │   '  "cache-control": "no-cache, no-store, max-age=0, must-revalidate",\n' +
+  │   '  "pragma": "no-cache",\n' +
+  │   '  "expires": "0",\n' +
+  │   '  "x-frame-options": "DENY"\n' +
+  │   '}'
+  │ 'Response Body (json):', '{\n' +
+  │   '  "content": [\n' +
+  │   '    {\n' +
+  │   '      "id": 1,\n' +
+  │   '      "shopId": 1,\n' +
+  │   '      "price": 100,\n' +
+  │   '      "quantity": 10,\n' +
+  │   '      "reservedQuantity": 0,\n' +
+  │   '      "active": true,\n' +
+  │   '      "createdAt": "2026-02-18T07:16:24.959504",\n' +
+  │   '      "updatedAt": "2026-02-18T07:16:24.959504",\n' +
+  │   '      "product": {\n' +
+  │   '        "id": 1,\n' +
+  │   '        "name": "Бутер привокзальный особый",\n' +
+  │   '        "description": "Филе хлеба, мышиные хвосты, костры рябин       ",\n' +
+  │   '        "sku": "SKU001"\n' +
+  │   '      }\n' +
+  │   '    },\n' +
+  │   '    {\n' +
+  │   '      "id": 4,\n' +
+  │   '      "shopId": 1,\n' +
+  │   '      "price": 100,\n' +
+  │   '      "quantity": 10,\n' +
+  │   '      "reservedQuantity": 0,\n' +
+  │   '      "active": true,\n' +
+  │   '      "createdAt": "2026-02-18T07:16:24.959504",\n' +
+  │   '      "updatedAt": "2026-02-18T07:16:24.959504",\n' +
+  │   '      "product": {\n' +
+  │   '        "id": 4,\n' +
+  │   '        "name": "Бутер 2                   ",\n' +
+  │   '        "description": "Содержимое бутера 2                            ",\n' +
+  │   '        "sku": "SKU004"\n' +
+  │   '      }\n' +
+  │   '    },\n' +
+  │   '    {\n' +
+  │   '      "id": 2,\n' +
+  │   '      "shopId": 1,\n' +
+  │   '      "price": 100,\n' +
+  │   '      "quantity": 113,\n' +
+  │   '      "reservedQuantity": 0,\n' +
+  │   '      "active": true,\n' +
+  │   '      "createdAt": "2026-02-18T07:16:24.959504",\n' +
+  │   '      "updatedAt": "2026-02-18T09:52:44.583603",\n' +
+  │   '      "product": {\n' +
+  │   '        "id": 2,\n' +
+  │   '        "name": "Бутер VIP                 ",\n' +
+  │   '        "description": "Франц.булка, куриная икра, ростки лука, трюфель",\n' +
+  │   '        "sku": "SKU002"\n' +
+  │   '      }\n' +
+  │   '    },\n' +
+  │   '    {\n' +
+  │   '      "id": 3,\n' +
+  │   '      "shopId": 1,\n' +
+  │   '      "price": 100,\n' +
+  │   '      "quantity": 147,\n' +
+  │   '      "reservedQuantity": 0,\n' +
+  │   '      "active": true,\n' +
+  │   '      "createdAt": "2026-02-18T07:16:24.959504",\n' +
+  │   '      "updatedAt": "2026-02-18T09:52:44.584627",\n' +
+  │   '      "product": {\n' +
+  │   '        "id": 3,\n' +
+  │   '        "name": "Бутер                     ",\n' +
+  │   '        "description": "Содержимое бутера                              ",\n' +
+  │   '        "sku": "SKU003"\n' +
+  │   '      }\n' +
+  │   '    }\n' +
+  │   '  ],\n' +
+  │   '  "page": {\n' +
+  │   '    "size": 20,\n' +
+  │   '    "number": 0,\n' +
+  │   '    "totalElements": 4,\n' +
+  │   '    "totalPages": 1\n' +
+  │   '  }\n' +
+  │   '}'
+  └
+  √  Статус 200 OK
+  ┌
+  │ 'Extracted quantities:', [ 10, 10, 113, 147 ]
+  │ 'Quantity details:'
+  │ 'Item 1 (Бутер привокзальный особый): 10 units'
+  │ 'Item 2 (Бутер 2): 10 units'
+  │ 'Item 3 (Бутер VIP): 113 units'
+  │ 'Item 4 (Бутер): 147 units'
+  └
+  √  Product 2 quantity decreased OK
+  √  Product 3 quantity decreased OK
+
+→ get order after ok
+  ┌
+  │ '=== REQUEST DATA ==='
+  │ 'URL:', 'http://arch.homework/api/v1/order/{{orderId}}'
+  │ 'Method:', 'GET'
+  │ 'Headers:', '{\n  "accept": "*/*",\n  "content-type": "application/json"\n}'
+  │ '\n'
+  └
+  ┌
+  │ 'Прошло 7 секунд, отправляю запрос'
+  └
+  GET http://arch.homework/api/v1/order/14 [200 OK, 556B, 26ms]
+  ┌
+  │ '=== RESPONSE DATA ==='
+  │ 'Status:', 200, 'OK'
+  │ 'Response Time:', 26, 'ms'
+  │ 'Response Headers:', '{\n' +
+  │   '  "date": "Wed, 18 Feb 2026 09:53:07 GMT",\n' +
+  │   '  "content-type": "application/json",\n' +
+  │   '  "transfer-encoding": "chunked",\n' +
+  │   '  "connection": "keep-alive",\n' +
+  │   '  "x-content-type-options": "nosniff",\n' +
+  │   '  "x-xss-protection": "0",\n' +
+  │   '  "cache-control": "no-cache, no-store, max-age=0, must-revalidate",\n' +
+  │   '  "pragma": "no-cache",\n' +
+  │   '  "expires": "0",\n' +
+  │   '  "x-frame-options": "DENY"\n' +
+  │   '}'
+  │ 'Response Body (json):', '{\n' +
+  │   '  "id": 14,\n' +
+  │   '  "username": "usr693",\n' +
+  │   '  "orderPositions": [\n' +
+  │   '    {\n' +
+  │   '      "productId": 2,\n' +
+  │   '      "price": 30,\n' +
+  │   '      "quantity": 1\n' +
+  │   '    },\n' +
+  │   '    {\n' +
+  │   '      "productId": 3,\n' +
+  │   '      "price": 70,\n' +
+  │   '      "quantity": 1\n' +
+  │   '    }\n' +
+  │   '  ],\n' +
+  │   '  "totalCost": 0.1,\n' +
+  │   '  "createdAt": "2026-02-18T09:52:38.98627",\n' +
+  │   '  "shopId": 1,\n' +
+  │   '  "status": "DELIVERY_RESERVED",\n' +
+  │   '  "deliveryId": 0\n' +
+  │   '}'
+  └
+  √  Статус 200 OK
+  √  Заказ создан, оплачен, передан в доставку
+
+→ order_create 2much
+  ┌
+  │ '=== REQUEST DATA ==='
+  │ 'URL:', 'http://arch.homework/api/v1/order'
+  │ 'Method:', 'POST'
+  │ 'Headers:', '{\n  "accept": "*/*",\n  "content-type": "application/json"\n}'
+  │ 'Body:', {
+  │   mode: 'raw',
+  │   raw: '{\n' +
+  │     '  "username": "{{randomUsername}}",\n' +
+  │     '  "totalCost": 0.01,\n' +
+  │     '  "createdAt": "2026-01-17T23:39:26.190Z",\n' +
+  │     '  "shopId": 1,\n' +
+  │     '  "status": "NEW",\n' +
+  │     '  "orderPositions": [\n' +
+  │     '    {\n' +
+  │     '      "productId": 2,\n' +
+  │     '      "price": 3,\n' +
+  │     '      "quantity": 1\n' +
+  │     '    },\n' +
+  │     '    {\n' +
+  │     '      "productId": 3,\n' +
+  │     '      "price": 4,\n' +
+  │     '      "quantity": 1\n' +
+  │     '    }    \n' +
+  │     '  ]\n' +
+  │     '}',
+  │   options: { raw: { language: 'json' } }
+  │ }
+  │ '\n'
+  └
+  ┌
+  │ 'Прошло 7 секунд, отправляю запрос'
+  └
+  POST http://arch.homework/api/v1/order [200 OK, 537B, 53ms]
+  ┌
+  │ '=== RESPONSE DATA ==='
+  │ 'Status:', 200, 'OK'
+  │ 'Response Time:', 53, 'ms'
+  │ 'Response Headers:', '{\n' +
+  │   '  "date": "Wed, 18 Feb 2026 09:53:14 GMT",\n' +
+  │   '  "content-type": "application/json",\n' +
+  │   '  "transfer-encoding": "chunked",\n' +
+  │   '  "connection": "keep-alive",\n' +
+  │   '  "x-content-type-options": "nosniff",\n' +
+  │   '  "x-xss-protection": "0",\n' +
+  │   '  "cache-control": "no-cache, no-store, max-age=0, must-revalidate",\n' +
+  │   '  "pragma": "no-cache",\n' +
+  │   '  "expires": "0",\n' +
+  │   '  "x-frame-options": "DENY"\n' +
+  │   '}'
+  │ 'Response Body (json):', '{\n' +
+  │   '  "id": 15,\n' +
+  │   '  "username": "usr693",\n' +
+  │   '  "orderPositions": [\n' +
+  │   '    {\n' +
+  │   '      "productId": 2,\n' +
+  │   '      "price": 3,\n' +
+  │   '      "quantity": 1\n' +
+  │   '    },\n' +
+  │   '    {\n' +
+  │   '      "productId": 3,\n' +
+  │   '      "price": 4,\n' +
+  │   '      "quantity": 1\n' +
+  │   '    }\n' +
+  │   '  ],\n' +
+  │   '  "totalCost": 0.01,\n' +
+  │   '  "createdAt": "2026-02-18T09:53:14.38294818",\n' +
+  │   '  "shopId": 1,\n' +
+  │   '  "status": "NEW",\n' +
+  │   '  "deliveryId": 0\n' +
+  │   '}'
+  └
+  √  Статус 200 OK
+  √  Заказ создан
+
+→ check balance fail
+  ┌
+  │ '=== REQUEST DATA ==='
+  │ 'URL:', 'http://arch.homework/api/v1/billing/account/balance'
+  │ 'Method:', 'GET'
+  │ 'Headers:', '{\n  "accept": "*/*",\n  "x-username": "{{randomUsername}}",\n  "content-typ
+  │ e": "application/json"\n}'
+  │ '\n'
+  └
+  ┌
+  │ 'Прошло 7 секунд, отправляю запрос'
+  └
+  ┌
+  │ 'Прошло 66 секунд, отправляю запрос'
+  └
+  GET http://arch.homework/api/v1/billing/account/balance [200 OK, 355B, 20ms]
+  ┌
+  │ '=== RESPONSE DATA ==='
+  │ 'Status:', 200, 'OK'
+  │ 'Response Time:', 20, 'ms'
+  │ 'Response Headers:', '{\n' +
+  │   '  "date": "Wed, 18 Feb 2026 09:54:21 GMT",\n' +
+  │   '  "content-type": "application/json",\n' +
+  │   '  "transfer-encoding": "chunked",\n' +
+  │   '  "connection": "keep-alive",\n' +
+  │   '  "x-content-type-options": "nosniff",\n' +
+  │   '  "x-xss-protection": "0",\n' +
+  │   '  "cache-control": "no-cache, no-store, max-age=0, must-revalidate",\n' +
+  │   '  "pragma": "no-cache",\n' +
+  │   '  "expires": "0",\n' +
+  │   '  "x-frame-options": "DENY"\n' +
+  │   '}'
+  │ 'Response Body (json):', '{\n  "id": 7,\n  "username": "usr693",\n  "balance": 149.9\n}'
+  │ [39m
+  └
+  √  Статус 200 OK
+  √  Деньги за заказ не списаны
+
+→ get_catalog after_fail
+  ┌
+  │ '=== REQUEST DATA ==='
+  │ 'URL:', 'http://arch.homework/api/v1/warehouse/catalog?size=20&shopId=1'
+  │ 'Method:', 'GET'
+  │ 'Headers:', '{\n  "accept": "*/*"\n}'
+  │ '\n'
+  └
+  ┌
+  │ 'Прошло 7 секунд, отправляю запрос'
+  └
+  GET http://arch.homework/api/v1/warehouse/catalog?size=20&shopId=1 [200 OK, 1.73kB, 29ms]
+  ┌
+  │ '=== RESPONSE DATA ==='
+  │ 'Status:', 200, 'OK'
+  │ 'Response Time:', 29, 'ms'
+  │ 'Response Headers:', '{\n' +
+  │   '  "date": "Wed, 18 Feb 2026 09:54:27 GMT",\n' +
+  │   '  "content-type": "application/json",\n' +
+  │   '  "transfer-encoding": "chunked",\n' +
+  │   '  "connection": "keep-alive",\n' +
+  │   '  "x-content-type-options": "nosniff",\n' +
+  │   '  "x-xss-protection": "0",\n' +
+  │   '  "cache-control": "no-cache, no-store, max-age=0, must-revalidate",\n' +
+  │   '  "pragma": "no-cache",\n' +
+  │   '  "expires": "0",\n' +
+  │   '  "x-frame-options": "DENY"\n' +
+  │   '}'
+  │ 'Response Body (json):', '{\n' +
+  │   '  "content": [\n' +
+  │   '    {\n' +
+  │   '      "id": 1,\n' +
+  │   '      "shopId": 1,\n' +
+  │   '      "price": 100,\n' +
+  │   '      "quantity": 10,\n' +
+  │   '      "reservedQuantity": 0,\n' +
+  │   '      "active": true,\n' +
+  │   '      "createdAt": "2026-02-18T07:16:24.959504",\n' +
+  │   '      "updatedAt": "2026-02-18T07:16:24.959504",\n' +
+  │   '      "product": {\n' +
+  │   '        "id": 1,\n' +
+  │   '        "name": "Бутер привокзальный особый",\n' +
+  │   '        "description": "Филе хлеба, мышиные хвосты, костры рябин       ",\n' +
+  │   '        "sku": "SKU001"\n' +
+  │   '      }\n' +
+  │   '    },\n' +
+  │   '    {\n' +
+  │   '      "id": 4,\n' +
+  │   '      "shopId": 1,\n' +
+  │   '      "price": 100,\n' +
+  │   '      "quantity": 10,\n' +
+  │   '      "reservedQuantity": 0,\n' +
+  │   '      "active": true,\n' +
+  │   '      "createdAt": "2026-02-18T07:16:24.959504",\n' +
+  │   '      "updatedAt": "2026-02-18T07:16:24.959504",\n' +
+  │   '      "product": {\n' +
+  │   '        "id": 4,\n' +
+  │   '        "name": "Бутер 2                   ",\n' +
+  │   '        "description": "Содержимое бутера 2                            ",\n' +
+  │   '        "sku": "SKU004"\n' +
+  │   '      }\n' +
+  │   '    },\n' +
+  │   '    {\n' +
+  │   '      "id": 2,\n' +
+  │   '      "shopId": 1,\n' +
+  │   '      "price": 100,\n' +
+  │   '      "quantity": 113,\n' +
+  │   '      "reservedQuantity": 0,\n' +
+  │   '      "active": true,\n' +
+  │   '      "createdAt": "2026-02-18T07:16:24.959504",\n' +
+  │   '      "updatedAt": "2026-02-18T09:54:02.905812",\n' +
+  │   '      "product": {\n' +
+  │   '        "id": 2,\n' +
+  │   '        "name": "Бутер VIP                 ",\n' +
+  │   '        "description": "Франц.булка, куриная икра, ростки лука, трюфель",\n' +
+  │   '        "sku": "SKU002"\n' +
+  │   '      }\n' +
+  │   '    },\n' +
+  │   '    {\n' +
+  │   '      "id": 3,\n' +
+  │   '      "shopId": 1,\n' +
+  │   '      "price": 100,\n' +
+  │   '      "quantity": 147,\n' +
+  │   '      "reservedQuantity": 0,\n' +
+  │   '      "active": true,\n' +
+  │   '      "createdAt": "2026-02-18T07:16:24.959504",\n' +
+  │   '      "updatedAt": "2026-02-18T09:54:02.906649",\n' +
+  │   '      "product": {\n' +
+  │   '        "id": 3,\n' +
+  │   '        "name": "Бутер                     ",\n' +
+  │   '        "description": "Содержимое бутера                              ",\n' +
+  │   '        "sku": "SKU003"\n' +
+  │   '      }\n' +
+  │   '    }\n' +
+  │   '  ],\n' +
+  │   '  "page": {\n' +
+  │   '    "size": 20,\n' +
+  │   '    "number": 0,\n' +
+  │   '    "totalElements": 4,\n' +
+  │   '    "totalPages": 1\n' +
+  │   '  }\n' +
+  │   '}'
+  └
+  √  Статус 200 OK
+  ┌
+  │ 'Extracted quantities:', [ 10, 10, 113, 147 ]
+  │ 'Quantity details:'
+  │ 'Item 1 (Бутер привокзальный особый): 10 units'
+  │ 'Item 2 (Бутер 2): 10 units'
+  │ 'Item 3 (Бутер VIP): 113 units'
+  │ 'Item 4 (Бутер): 147 units'
+  └
+  √  Product 2 quantity restored OK
+  √  Product 3 quantity restored OK
+
+→ get order Canceled
+  ┌
+  │ '=== REQUEST DATA ==='
+  │ 'URL:', 'http://arch.homework/api/v1/order/{{orderId}}'
+  │ 'Method:', 'GET'
+  │ 'Headers:', '{\n  "accept": "*/*",\n  "content-type": "application/json"\n}'
+  │ '\n'
+  └
+  ┌
+  │ 'Прошло 7 секунд, отправляю запрос'
+  └
+  GET http://arch.homework/api/v1/order/15 [200 OK, 546B, 30ms]
+  ┌
+  │ '=== RESPONSE DATA ==='
+  │ 'Status:', 200, 'OK'
+  │ 'Response Time:', 30, 'ms'
+  │ 'Response Headers:', '{\n' +
+  │   '  "date": "Wed, 18 Feb 2026 09:54:37 GMT",\n' +
+  │   '  "content-type": "application/json",\n' +
+  │   '  "transfer-encoding": "chunked",\n' +
+  │   '  "connection": "keep-alive",\n' +
+  │   '  "x-content-type-options": "nosniff",\n' +
+  │   '  "x-xss-protection": "0",\n' +
+  │   '  "cache-control": "no-cache, no-store, max-age=0, must-revalidate",\n' +
+  │   '  "pragma": "no-cache",\n' +
+  │   '  "expires": "0",\n' +
+  │   '  "x-frame-options": "DENY"\n' +
+  │   '}'
+  │ 'Response Body (json):', '{\n' +
+  │   '  "id": 15,\n' +
+  │   '  "username": "usr693",\n' +
+  │   '  "orderPositions": [\n' +
+  │   '    {\n' +
+  │   '      "productId": 2,\n' +
+  │   '      "price": 3,\n' +
+  │   '      "quantity": 1\n' +
+  │   '    },\n' +
+  │   '    {\n' +
+  │   '      "productId": 3,\n' +
+  │   '      "price": 4,\n' +
+  │   '      "quantity": 1\n' +
+  │   '    }\n' +
+  │   '  ],\n' +
+  │   '  "totalCost": 0.01,\n' +
+  │   '  "createdAt": "2026-02-18T09:53:14.382948",\n' +
+  │   '  "shopId": 1,\n' +
+  │   '  "status": "CANCELED",\n' +
+  │   '  "deliveryId": 0\n' +
+  │   '}'
+  └
+  √  Статус 200 OK
+  √  Заказ отменен
+
+┌─────────────────────────┬───────────────────┬───────────────────┐
+│                         │          executed │            failed │
+├─────────────────────────┼───────────────────┼───────────────────┤
+│              iterations │                 1 │                 0 │
+├─────────────────────────┼───────────────────┼───────────────────┤
+│                requests │                13 │                 0 │
+├─────────────────────────┼───────────────────┼───────────────────┤
+│            test-scripts │                26 │                 0 │
+├─────────────────────────┼───────────────────┼───────────────────┤
+│      prerequest-scripts │                15 │                 0 │
+├─────────────────────────┼───────────────────┼───────────────────┤
+│              assertions │                24 │                 0 │
+├─────────────────────────┴───────────────────┴───────────────────┤
+│ total run duration: 2m 33s                                      │
+├─────────────────────────────────────────────────────────────────┤
+│ total data received: 6.4kB (approx)                             │
+├─────────────────────────────────────────────────────────────────┤
+│ average response time: 51ms [min: 14ms, max: 246ms, s.d.: 66ms] │
+└─────────────────────────────────────────────────────────────────┘

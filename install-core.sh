@@ -23,7 +23,7 @@ helm upgrade --install nginx ingress-nginx/ingress-nginx \
   --namespace zsvv-ng \
   --create-namespace \
   --set controller.admissionWebhooks.patch.enabled=true
-wait_seconds 20
+wait_seconds 45
 
 kubectl create namespace zsvv-main
 echo "Step 3: Installing PostgreSQL..."
@@ -39,7 +39,9 @@ helm upgrade --install hw6-api ./install/gateway-service/ \
   --set endpoints.order.space=zsvv-main \
   --set endpoints.auth.space=zsvv-authority \
   --set endpoints.notif.space=zsvv-main \
-  --set endpoints.bill.space=zsvv-main
+  --set endpoints.bill.space=zsvv-main \
+  --set endpoints.warehouse.space=zsvv-main \
+  --set endpoints.delivery.space=zsvv-main 
 wait_seconds 20
 
 echo "Step 5: Installing Kafka..."

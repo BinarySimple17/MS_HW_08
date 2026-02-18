@@ -35,8 +35,12 @@ echo "Uninstalling Auth Service Service..."
 helm uninstall hw6 -n zsvv-authority 2>/dev/null || echo "Auth Service not found or already uninstalled"
 echo "Auth Service uninstalled. Waiting 3 seconds..."
 
-# echo "Uninstalling API Gateway Service..."
-# helm uninstall hw6-api -n zsvv-main 2>/dev/null || echo "API Gateway not found or already uninstalled"
-# echo "Auth Service uninstalled. Waiting 3 seconds..."
+echo "Uninstalling Warehouse Service..."
+helm uninstall hw8-warehouse -n zsvv-main 2>/dev/null || echo "Warehouse service not found or already uninstalled"
+echo "Warehouse Service uninstalled. Waiting 3 seconds..."
+
+echo "Uninstalling Delivery Service..."
+helm uninstall hw8-delivery -n zsvv-main 2>/dev/null || echo "Delivery service not found or already uninstalled"
+echo "Delivery Service uninstalled. Waiting 3 seconds..."
 
 echo "Uninstallation completed!"

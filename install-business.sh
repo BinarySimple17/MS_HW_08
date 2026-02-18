@@ -20,6 +20,9 @@ kubectl apply -f ./install/k8s/manifests/notif-secrets.yaml -n zsvv-main
 kubectl apply -f ./install/k8s/manifests/order-secrets.yaml -n zsvv-main 
 kubectl apply -f ./install/k8s/manifests/bill-secrets.yaml -n zsvv-main
 
+kubectl apply -f ./install/k8s/manifests/warehouse-secrets.yaml -n zsvv-main
+kubectl apply -f ./install/k8s/manifests/delivery-secrets.yaml -n zsvv-main
+
 kubectl create namespace zsvv-authority
 kubectl apply -f ./install/k8s/manifests/auth-secrets.yaml -n zsvv-authority 
 
@@ -90,24 +93,18 @@ wait_seconds 20
 
 # Установка Warehouse Service
 echo "Step 6: Installing Warehouse Service..."
-helm upgrade --install hw7-order ./install/warehouse-service/ \
+helm upgrade --install hw8-warehouse ./install/warehouse-service/ \
   -n zsvv-main \
-  --set endpoints.users.space=zsvv-main \
-  --set endpoints.auth.space=zsvv-authority \
-  --set endpoints.kafka.space=zsvv-kafka \
-  --set endpoints.bill.space=zsvv-main
+  --set endpoints.kafka.space=zsvv-kafka
 
 echo "Warehouse Service installed. Waiting 5 seconds..."
 wait_seconds 20
 
 # Установка Delivery Service
 echo "Step 6: Installing Delivery Service..."
-helm upgrade --install hw7-order ./install/delivery-service/ \
+helm upgrade --install hw8-delivery ./install/delivery-service/ \
   -n zsvv-main \
-  --set endpoints.users.space=zsvv-main \
-  --set endpoints.auth.space=zsvv-authority \
-  --set endpoints.kafka.space=zsvv-kafka \
-  --set endpoints.bill.space=zsvv-main
+  --set endpoints.kafka.space=zsvv-kafka
 
 echo "Delivery Service installed. Waiting 5 seconds..."
 wait_seconds 20

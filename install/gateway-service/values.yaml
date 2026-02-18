@@ -175,3 +175,13 @@ endpoints:
     host: "notification-service"
     space: "default"
     port: "8080"
+  warehouse:
+    release: "hw8-warehouse"
+    host: "warehouse-service"
+    space: "default"
+    port: "8080"
+  delivery:
+    release: "hw8-delivery"
+    host: "delivery-service"
+    space: "default"
+    port: "8080"

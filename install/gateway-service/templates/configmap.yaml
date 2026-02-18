@@ -77,6 +77,28 @@ data:
               #    args:
               #      name: userService
               #      fallbackUri: forward:/fallback/user               
+            - id: warehouse-service
+              uri: http://{{ .Values.endpoints.warehouse.release }}-{{ .Values.endpoints.warehouse.host }}.{{ .Values.endpoints.warehouse.space }}.svc.cluster.local:{{ .Values.endpoints.warehouse.port }}
+              predicates:
+                - Path=/api/v1/warehouse/**
+              filters:
+                - StripPrefix=2
+                - name: AuthenticationFilter
+              #  - name: CircuitBreaker
+              #    args:
+              #      name: userService
+              #      fallbackUri: forward:/fallback/user                
+            - id: delivery-service
+              uri: http://{{ .Values.endpoints.delivery.release }}-{{ .Values.endpoints.delivery.host }}.{{ .Values.endpoints.delivery.space }}.svc.cluster.local:{{ .Values.endpoints.delivery.port }}
+              predicates:
+                - Path=/api/v1/delivery/**
+              filters:
+                - StripPrefix=2
+                - name: AuthenticationFilter
+              #  - name: CircuitBreaker
+              #    args:
+              #      name: userService
+              #      fallbackUri: forward:/fallback/user 
     logging:
       level:
         org.springframework: INFO
@@ -90,3 +112,5 @@ data:
       order-service: http://{{ .Values.endpoints.order.release }}-{{ .Values.endpoints.order.host }}.{{ .Values.endpoints.order.space }}.svc.cluster.local:{{ .Values.endpoints.order.port }}
       notif-service: http://{{ .Values.endpoints.notif.release }}-{{ .Values.endpoints.notif.host }}.{{ .Values.endpoints.notif.space }}.svc.cluster.local:{{ .Values.endpoints.notif.port }}
       bill-service: http://{{ .Values.endpoints.bill.release }}-{{ .Values.endpoints.bill.host }}.{{ .Values.endpoints.bill.space }}.svc.cluster.local:{{ .Values.endpoints.bill.port }}
+      warehouse-service: http://{{ .Values.endpoints.warehouse.release }}-{{ .Values.endpoints.warehouse.host }}.{{ .Values.endpoints.warehouse.space }}.svc.cluster.local:{{ .Values.endpoints.warehouse.port }}
+      delivery-service: http://{{ .Values.endpoints.delivery.release }}-{{ .Values.endpoints.delivery.host }}.{{ .Values.endpoints.delivery.space }}.svc.cluster.local:{{ .Values.endpoints.delivery.port }}

@@ -50,6 +50,24 @@ echo "Uninstalling Auth Service Service..."
 helm uninstall hw6 -n zsvv-authority 2>/dev/null || echo "Auth Service not found or already uninstalled"
 echo "Auth Service uninstalled. Waiting 3 seconds..."
 
+echo "Uninstalling Warehouse Service..."
+# Предполагаем, что billing service установлен как отдельный release
+helm uninstall hw8-warehouse -n zsvv-main 2>/dev/null || echo "Warehouse Service not found or already uninstalled"
+echo "Warehouse Service uninstalled. Waiting 3 seconds..."
+wait_seconds 3
+
+echo "Uninstalling delivery Service..."
+# Предполагаем, что billing service установлен как отдельный release
+helm uninstall hw8-delivery -n zsvv-main 2>/dev/null || echo "delivery Service not found or already uninstalled"
+echo "delivery Service uninstalled. Waiting 3 seconds..."
+wait_seconds 3
+
+echo "Uninstalling api gateway Service..."
+# Предполагаем, что billing service установлен как отдельный release
+helm uninstall hw6-api -n zsvv-main 2>/dev/null || echo "gateway Service not found or already uninstalled"
+echo "gateway Service uninstalled. Waiting 3 seconds..."
+wait_seconds 3
+
 echo "Deleting all namespaces starting with 'zsvv-'..."
 
 # Получаем список всех неймспейсов
